@@ -60,8 +60,8 @@ public class Solitaire {
         int deckPtr = 0;
 
         // 2D array of cards:
-        // [7 main rows + 4 aces][13 possible cards]
-        Card[][] board = new Card[deckSize / 4][7 + 4];
+        // [7 main rows + 4 aces + 1 extra pile][26 empty slots (with extra pile)]
+        Card[][] board = new Card[deckSize / 2][7 + 4 + 1];
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -70,7 +70,7 @@ public class Solitaire {
         }
 
         for (int i = 0; i < board.length; i++) {
-            for (int j = i; j < board[0].length - 4; j++) {
+            for (int j = i; j < board[0].length - 5; j++) {
                 if (i == j) {
                     deck[deckPtr].faceUp = true;
                     board[i][j] = deck[deckPtr++];
@@ -78,6 +78,13 @@ public class Solitaire {
                     board[i][j] = deck[deckPtr++];
                 }
             }
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            if (deckPtr < deckSize)
+                board[i][board[0].length - 1] = deck[deckPtr++];
+            else
+                break;
         }
 
         return board;
