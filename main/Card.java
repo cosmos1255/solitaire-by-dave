@@ -12,6 +12,13 @@ class Card {
     char color;
     boolean faceUp;
 
+    public Card() {
+        this.num = 0;
+        this.suit = 0;
+        this.color = 0;
+        this.faceUp = false;
+    }
+
     public Card(int num, char suit, boolean faceUp) {
         this.num = num;
         this.suit = suit;
@@ -23,7 +30,13 @@ class Card {
         }
     }
 
-    void whichCard() {
+    public void whichCardShort() {
+        String[] faceCards = { "J", "Q", "K", "A" };
+        System.out
+                .print((this.num <= 10 ? this.num : faceCards[(this.num % 10) - 1]) + "" + this.suit + faceUp + "  \t");
+    }
+
+    public void whichCardLong() {
         String suitStr = "";
         String[] faceCards = { "Jack", "Queen", "King", "Ace" };
         switch (this.suit) {
@@ -40,7 +53,7 @@ class Card {
                 suitStr = "Clubs";
                 break;
         }
-        System.out.println((num <= 10 ? num : faceCards[(num % 10) - 1]) + " of " + suitStr + ". "
+        System.out.print((num <= 10 ? num : faceCards[(num % 10) - 1]) + " of " + suitStr + ". "
                 + ((faceUp) ? "Face up." : "Face down."));
     }
 
